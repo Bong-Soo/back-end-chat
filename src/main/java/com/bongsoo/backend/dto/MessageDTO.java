@@ -11,7 +11,7 @@ public class MessageDTO {
     private String avatar;
     private String user_name;
     private LocalDateTime cur_data;
-    private ContentType content_type; // 상태 ENTER, TALK
+    private ContentType content_type;
     private String content;
 
 }
