@@ -14,7 +14,7 @@ public class MemberDTO {
 
     public Member toEntity(){
         return Member.builder()
-                .memberId(id)
+                .userId(id)
                 .pw(pw)
                 .name(name)
                 .build();

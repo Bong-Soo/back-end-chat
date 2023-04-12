@@ -11,5 +11,5 @@ import java.util.List;
 
 @Repository
 public interface JoinServerRepository extends JpaRepository<JoinServer, Long> {
-    List<JoinServer> findByServerMemberId_Id(Long memberId);
+    List<JoinServer> findByMember_Id(Long Id);
 }

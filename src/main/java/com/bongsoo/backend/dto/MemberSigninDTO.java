@@ -13,7 +13,7 @@ public class MemberSigninDTO {
 
     public Member toEntity(){
         return Member.builder()
-                .memberId(id)
+                .userId(id)
                 .pw(pw)
                 .build();
     }

@@ -26,18 +26,18 @@ public class Member {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "member_id")
-    private String memberId;
+    @Column(name = "user_id")
+    private String userId;
 
     @Column(name = "pw")
     private String pw;
 
     @Builder.Default
-    @OneToMany(mappedBy = "serverMemberId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<JoinServer> joinServers = new HashSet<>();
 
     @Builder.Default
-    @OneToMany(mappedBy = "roomMemberId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<JoinRoom> joinRooms = new HashSet<>();
 
 

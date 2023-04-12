@@ -1,17 +1,16 @@
 package com.bongsoo.backend.model;
 
 import com.bongsoo.backend.type.RoomType;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 // lombok 기능
-@Data               // Getter Setter 및 여러 기능
+@Getter
+@Setter // Getter Setter 및 여러 기능
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,22 +21,22 @@ public class Room {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "room_number")
-    private Long roomNumber;
+    @Column(name = "id")
+    private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "server_number", nullable = false)
+    @JoinColumn(name = "server_id", nullable = false)
     private Server server;
 
-    @Column(name = "room_name", nullable = false)
-    private String roomName;
+    @Column(name = "name", nullable = false)
+    private String name;
 
-    @Column(name = "room_type", nullable = false)
+    @Column(name = "type", nullable = false)
     @Enumerated(EnumType.STRING)
-    private RoomType roomType;
+    private RoomType type;
 
     @Builder.Default
-    @OneToMany(mappedBy = "roomNumber", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<JoinRoom> joinRooms = new HashSet<>();
 
 }

@@ -25,7 +25,7 @@ public class MemberService {
 
     public Long sign_in(Member member){
         // 유저 검색
-        Optional<Member> findMember = memberRepository.findByMemberId(member.getMemberId());
+        Optional<Member> findMember = memberRepository.findByUserId(member.getUserId());
         // NULL
         if(findMember.isPresent()){ // 결과 확인
             if(findMember.get().getPw().equals(member.getPw())) // 비밀번호 대조

@@ -16,18 +16,18 @@ import javax.persistence.Enumerated;
 @AllArgsConstructor
 public class RoomDTO {
 
-    private Long roomNumber;
-    private Long serverNumber;
-    private String roomName;
+    private Long id;
+    private Long serverId;
+    private String name;
     @Enumerated(EnumType.STRING)
-    private RoomType roomType;
+    private RoomType type;
 
     public Room toEntity(){
         return Room.builder()
-                .roomNumber(this.roomNumber)
-                .server(Server.builder().serverNumber(this.serverNumber).build())
-                .roomName(this.roomName)
-                .roomType(this.roomType)
+                .id(this.id)
+                .server(Server.builder().id(this.serverId).build())
+                .name(this.name)
+                .type(this.type)
                 .build();
     }
 }

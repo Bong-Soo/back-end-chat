@@ -7,9 +7,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class JoinServerDTO {
-    private Long id;
-    private String name;
-
-    // Getters and setters
+public class FriendDTO {
+    private String friend;
 }

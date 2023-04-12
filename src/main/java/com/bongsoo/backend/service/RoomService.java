@@ -25,15 +25,15 @@ public class RoomService {
     @Transactional
     public List<RoomDTO> findAllRoom(){         // 1. ServerDTO 를 사용하여 순환참조 발생 방지 구현    2. DB 연관관계로 생성된 list<Room> 사용
         // Select * from room  -> (we will change) Select * from room where serverNumber = ""
-        List<Room> rooms = new ArrayList<>(roomRepository.findByServer(Server.builder().serverNumber(1L).build()));
+        List<Room> rooms = new ArrayList<>(roomRepository.findByServer(Server.builder().id(1L).build()));
         List<RoomDTO> roomDTOS = new ArrayList<>();
 
         for(Room room : rooms){
             roomDTOS.add(RoomDTO.builder()
-                    .roomNumber(room.getRoomNumber())
-                    .serverNumber(room.getServer().getServerNumber())
-                    .roomName(room.getRoomName())
-                    .roomType(room.getRoomType())
+                    .id(room.getId())
+                    .serverId(room.getServer().getId())
+                    .name(room.getName())
+                    .type(room.getType())
                     .build());
         }
 
@@ -42,7 +42,7 @@ public class RoomService {
     public RoomDTO createRoom(RoomDTO roomDTO) {    // 방 생성 함수, 생성시 채팅 txt 도 같이 생성
         roomRepository.save(roomDTO.toEntity());
         try{
-            File file = new File("../txt/"+roomDTO.getServerNumber()+"_"+roomDTO.getRoomNumber()+".txt");
+            File file = new File("../txt/"+roomDTO.getServerId()+"_"+roomDTO.getId()+".txt");
             if(!file.exists()){
                 file.createNewFile();
             }
@@ -57,7 +57,7 @@ public class RoomService {
         Room room;
         if(rooms.isPresent()) {
             room = rooms.get();
-            File roomChat = new File("../txt/" + room.getServer().getServerNumber() + "_" + room.getRoomNumber() + ".txt");
+            File roomChat = new File("../txt/" + room.getServer().getId() + "_" + room.getId() + ".txt");
 
             List<MessageDTO> messageList = new ArrayList<>();
             try {

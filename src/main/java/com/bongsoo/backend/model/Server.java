@@ -1,9 +1,7 @@
 package com.bongsoo.backend.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -11,7 +9,8 @@ import java.util.Set;
 
 
 // lombok 기능
-@Data               // Getter Setter 및 여러 기능
+@Getter
+@Setter// Getter Setter 및 여러 기능
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,17 +21,17 @@ public class Server {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "server_number")
-    private Long serverNumber;
+    @Column(name = "id")
+    private Long id;
 
-    @Column(name = "server_name", nullable = false)
-    private String serverName;
+    @Column(name = "name", nullable = false)
+    private String name;
 
     @OneToMany(mappedBy = "server", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Room> rooms;
 
     @Builder.Default
-    @OneToMany(mappedBy = "serverNumber", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "server", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<JoinServer> joinServers = new HashSet<>();
 
 }

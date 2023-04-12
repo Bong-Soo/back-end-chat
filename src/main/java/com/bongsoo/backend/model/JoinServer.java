@@ -16,10 +16,10 @@ public class JoinServer {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "server_number", nullable = false)
-    private Server serverNumber;
+    @JoinColumn(name = "server_id", nullable = false)
+    private Server server;
 
     @ManyToOne
-    @JoinColumn(name = "server_member_id", nullable = false)
-    private Member serverMemberId;
+    @JoinColumn(name = "member_id", nullable = false)
+    private Member member;
 }

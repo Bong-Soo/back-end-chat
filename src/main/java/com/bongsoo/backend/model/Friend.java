@@ -1,8 +1,15 @@
 package com.bongsoo.backend.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
+@Data
 @Entity
+@NoArgsConstructor  // 기본생성자
+@AllArgsConstructor // 전채생성자
 @Table(name = "friends")
 public class Friend {
 
