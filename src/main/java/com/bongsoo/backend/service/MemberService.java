@@ -13,8 +13,6 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
 
-
-    @Transactional
     public String sign_up(Member member){
         try {
             memberRepository.save(member);
@@ -25,17 +23,14 @@ public class MemberService {
         return "success";
     }
 
-    @Transactional
-    public String sign_in(Member member){
+    public Long sign_in(Member member){
         // 유저 검색
         Optional<Member> findMember = memberRepository.findByMemberId(member.getMemberId());
         // NULL
-        if(findMember.isPresent()){
-            // 비밀번호 대조
-            if(findMember.get().getPw().equals(member.getPw())){
-                return "success";
-            }
+        if(findMember.isPresent()){ // 결과 확인
+            if(findMember.get().getPw().equals(member.getPw())) // 비밀번호 대조
+                return findMember.get().getId();
         }
-        return "fail";
+        return 0L;
     }
 }

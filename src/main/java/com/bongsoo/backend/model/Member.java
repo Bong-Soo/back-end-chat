@@ -41,10 +41,10 @@ public class Member {
     private Set<JoinRoom> joinRooms = new HashSet<>();
 
 
-    @OneToMany(mappedBy = "follower", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Follow> following;
+    @OneToMany(mappedBy = "member1", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Friend> member1;
 
-    @OneToMany(mappedBy = "followee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Follow> followers;
+    @OneToMany(mappedBy = "member2", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Friend> member2;
 
 }

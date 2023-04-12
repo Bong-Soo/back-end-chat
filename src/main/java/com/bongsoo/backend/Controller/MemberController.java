@@ -24,10 +24,12 @@ public class MemberController {
 
     @RequestMapping(value = "/sign_in",method = {RequestMethod.POST})
     public String sign_in(@RequestBody MemberSigninDTO memberSigninDTO){
-        String result = memberService.sign_in(memberSigninDTO.toEntity());
-        if(result.equals("success"))
-            session.setAttribute("ID", memberSigninDTO.getId());
-        return result;
+        Long result = memberService.sign_in(memberSigninDTO.toEntity());
+        if(!result.equals(0L)) {
+            session.setAttribute("Id", result);
+            return "success";
+        }
+        return "fail";
     }
 
     @RequestMapping(value = "/sign_out", method = {RequestMethod.POST})
