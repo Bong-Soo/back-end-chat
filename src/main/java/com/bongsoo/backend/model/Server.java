@@ -1,20 +1,17 @@
 package com.bongsoo.backend.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 
-// lombok 기능
+// lombok
 @Getter
-@Setter// Getter Setter 및 여러 기능
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-// Table 설정
+@Setter
+@NoArgsConstructor  // 기본생성자
+@AllArgsConstructor // 전채생성자
+// JPA Table
 @Entity
 @Table(name = "server")
 public class Server {

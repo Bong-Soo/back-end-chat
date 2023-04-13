@@ -1,20 +1,18 @@
 package com.bongsoo.backend.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-// lombok 기능
-@Data               // Getter Setter 및 여러 기능
-@Builder            // MemberDTO 에서 사용
+// lombok
+@Getter
+@Setter
+@Builder
 @NoArgsConstructor  // 기본생성자
 @AllArgsConstructor // 전채생성자
-// Table 설정
+// JPA Table
 @Entity
 @Table(name = "member")
 public class Member {

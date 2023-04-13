@@ -1,20 +1,19 @@
 package com.bongsoo.backend.model;
 
 import com.bongsoo.backend.type.RoomType;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-// lombok 기능
+// lombok
 @Getter
 @Setter // Getter Setter 및 여러 기능
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-// Table 설정
+// JPA Table
 @Entity
 @Table(name = "room")
 public class Room {

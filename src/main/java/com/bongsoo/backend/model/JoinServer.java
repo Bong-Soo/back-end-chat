@@ -1,12 +1,15 @@
 package com.bongsoo.backend.model;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 
-// lombok 기능
-@Data               // Getter Setter 및 여러 기능
-// Table 설정
+// lombok
+@Getter
+@Setter
+@NoArgsConstructor  // 기본생성자
+@AllArgsConstructor // 전채생성자
+// JPA Table
 @Entity
 @Table(name = "join_server")
 public class JoinServer {
