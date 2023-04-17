@@ -7,11 +7,9 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDateTime;
-
 @RequiredArgsConstructor
 @RestController
-public class ChatMessageController {
+public class RoomChatController {
 
     private final SimpMessageSendingOperations simpMessageSendingOperations;
     //메시지를 도착지까지 보내는 MessageSendingOperations<Destination> 을 스프링 프레임워크에 맞춘것. 문서에 대놓고 STOMP같은걸 지원하기 위함이라고 써져있다.

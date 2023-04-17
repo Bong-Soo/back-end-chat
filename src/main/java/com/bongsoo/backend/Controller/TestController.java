@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-public class UserController {
+public class TestController {
     private final RoomService roomService;
 
     @GetMapping("/test")

@@ -1,7 +1,5 @@
 package com.bongsoo.backend.service;
 
-import com.bongsoo.backend.model.Room;
-import com.bongsoo.backend.repository.RoomRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

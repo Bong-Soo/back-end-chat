@@ -9,6 +9,7 @@ import java.util.Set;
 // lombok
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor  // 기본생성자
 @AllArgsConstructor // 전채생성자
 // JPA Table

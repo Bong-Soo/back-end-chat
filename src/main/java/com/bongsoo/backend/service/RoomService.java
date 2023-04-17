@@ -22,7 +22,6 @@ public class RoomService {
 
     private final RoomRepository roomRepository;
 
-    @Transactional
     public List<RoomDTO> findAllRoom(){         // 1. ServerDTO 를 사용하여 순환참조 발생 방지 구현    2. DB 연관관계로 생성된 list<Room> 사용
         // Select * from room  -> (we will change) Select * from room where serverNumber = ""
         List<Room> rooms = new ArrayList<>(roomRepository.findByServer(Server.builder().id(1L).build()));
@@ -84,5 +83,10 @@ public class RoomService {
         }
         return new ArrayList<>();
     }
+
+
+
+
+
 
 }

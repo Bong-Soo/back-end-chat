@@ -14,9 +14,8 @@ public class MemberService {
     private final MemberRepository memberRepository;
 
     public String sign_up(Member member){
-        try {
-            memberRepository.save(member);
-        }catch (Exception e){
+        try {memberRepository.save(member);}        // 회원가입(정보 저장)
+        catch (Exception e){                        // 예외처리
             System.out.println(e.getMessage());
             return "fail";
         }
@@ -24,13 +23,9 @@ public class MemberService {
     }
 
     public Long sign_in(Member member){
-        // 유저 검색
-        Optional<Member> findMember = memberRepository.findByUserId(member.getUserId());
-        // NULL
-        if(findMember.isPresent()){ // 결과 확인
-            if(findMember.get().getPw().equals(member.getPw())) // 비밀번호 대조
-                return findMember.get().getId();
-        }
+        Optional<Member> findMember = memberRepository.findByUserId(member.getUserId());    // Member 검색
+        if(findMember.isPresent() && findMember.get().getPw().equals(member.getPw()))       // 1. 예외처리 2. 비밀번호 대조
+            return findMember.get().getId();
         return 0L;
     }
 }
