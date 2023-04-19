@@ -1,11 +1,15 @@
 package com.bongsoo.backend.Controller;
 
 
+import com.bongsoo.backend.dto.MessageDTO;
 import com.bongsoo.backend.service.MessageService;
+import com.bongsoo.backend.type.MessageType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.time.LocalDateTime;
 
 @RequiredArgsConstructor
 @RestController
@@ -18,20 +22,19 @@ public class RoomChatController {
 
     @MessageMapping("/chat/message")            // Member 입장
     // 1. 프론트에서 받을 데이터 Vue 구조와 백에서 class 와 같은 형태의 구조 개발 필요
-    public void enter(){//(Message message){
-//        if(Status.ENTER.equals(message.getType())){
-//            message.setMessage(message.getSender()+"님 입장");
-//        }
-//        simpMessageSendingOperations.convertAndSend("/topic/chat/room/"+message.getRoomId(),message);
-        //convertAndSend 사용하여 STOMP 토픽으로 보낼 때 또는 핸들러 메소드의 결과로서 그 토픽을 구독하는 클라이언트는 메시지를 수신한다.
+    public void enter(MessageDTO messageDTO){
+        if(MessageType.ENTER.equals(messageDTO.getMessage_type()))
+            messageDTO.setContent(messageDTO.getUser_id()+"님 입장");
+        messageDTO.setDateTime(LocalDateTime.now());
+        simpMessageSendingOperations.convertAndSend("/topic/chat/room/"+messageDTO.getUser_id(),messageDTO);
+//        convertAndSend 사용하여 STOMP 토픽으로 보낼 때 또는 핸들러 메소드의 결과로서 그 토픽을 구독하는 클라이언트는 메시지를 수신한다.
     }
 
     @MessageMapping("/chat/Message")        // message 받았을 때 처리 과정
-    public void sendMessage(){ //(@Payload Message message){    // 이전 message class 모양으로 받아옴
-//        message.setSendDate(LocalDateTime.now());             // 메세지 받은 시간을 기준으로 표기
-//        message.setRoomId(message.getRoomId());               // 나니 고래? 왜 자신의 ID를 다시 자신의 ID로 표시???
-//        simpMessageSendingOperations.convertAndSend("/topic/chat/room/"+message.getRoomId(),message);     // 모든 소켓에 메세지 뿌리기
-//        messageService.appendToChatLogFile(message.getRoomId(),message);      // 채팅기록 txt 파일에 기록하기 위한 메소드 message 객체 넘겨주기
+    public void sendMessage(MessageDTO messageDTO){    // 이전 message class 모양으로 받아옴
+        messageDTO.setDateTime(LocalDateTime.now());             // 메세지 받은 시간을 기준으로 표기
+        simpMessageSendingOperations.convertAndSend("/topic/chat/room/"+messageDTO.getRoom_id(),messageDTO);     // 모든 소켓에 메세지 뿌리기
+        messageService.appendToChatLogFile(messageDTO.getRoom_id(),messageDTO);      // 서버 id 및 룸 id 필요 프론트에서 받아올 수 있으면 받고 없으면 JPA 돌려야하는데 채팅 보낼 때 마다 하기에는 부담이 크다
     }
 
 }

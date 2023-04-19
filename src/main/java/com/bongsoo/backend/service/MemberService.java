@@ -5,7 +5,6 @@ import com.bongsoo.backend.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.Optional;
 @RequiredArgsConstructor
 @Service
