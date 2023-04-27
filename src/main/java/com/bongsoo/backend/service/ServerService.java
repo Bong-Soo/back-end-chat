@@ -17,6 +17,10 @@ public class ServerService {
 
     private final ServerRepository serverRepository;
 
+    public Server findById(long id){
+        return serverRepository.findById(id).orElse(null);
+    }
+
     public List<RoomDTO> getRooms(Long server_id){
         Server server = serverRepository.findById(server_id)                                            // id로 검색하여 Server 가져오기
                 .orElseThrow(() -> new NoSuchElementException("No server found with id " + server_id)); // 예외처리
